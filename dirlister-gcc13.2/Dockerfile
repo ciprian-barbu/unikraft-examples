@@ -1,0 +1,3 @@
+FROM scratch
+
+COPY test.txt /test.txt

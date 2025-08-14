@@ -1,0 +1,78 @@
+spec: v0.6
+
+name: dirlister
+
+rootfs: ./Dockerfile
+
+unikraft:
+  version: staging
+  kconfig:
+    CONFIG_LIBPOSIX_ENVIRON: 'y'
+    CONFIG_LIBPOSIX_SYSINFO: 'y'
+    CONFIG_LIBPOSIX_TIME: 'y'
+    CONFIG_LIBPOSIX_TIMERFD: 'y'
+
+    # For using an external initrd archive you will need
+    # to enable Unikraft's VFS subsystem:
+    CONFIG_LIBUKDEBUG_PRINTK_ERR: 'y'
+    CONFIG_LIBVFSCORE: 'y'
+    CONFIG_LIBUKCPIO: 'y'
+
+    # For any use of initrd you will need to enable:
+    CONFIG_LIBRAMFS: 'y'
+
+    # For automatic mounting of the initramfs during boot.
+    # Note this configuration prevents the unikernel from
+    # using anything else other than initrd as the rootfs.
+    CONFIG_LIBVFSCORE_AUTOMOUNT_ROOTFS: 'y'
+    CONFIG_LIBVFSCORE_ROOTFS_INITRD: 'y'
+    CONFIG_LIBVFSCORE_ROOTFS: "initrd"
+    CONFIG_LIBVFSCORE_AUTOMOUNT_UP: 'y'
+    CONFIG_LIBVFSCORE_AUTOMOUNT: 'y'
+
+    # Alternatively, for dynamic mounting, wherein you
+    # configure mounting options at boot time via
+    # kernel command-line arguments:
+    CONFIG_LIBVFSCORE_FSTAB: 'y'
+    CONFIG_LIBDEVFS: 'y'
+    CONFIG_LIBDEVFS_AUTOMOUNT: 'y'
+    CONFIG_LIBDEVFS_DEVSTDOUT: 'y'
+    CONFIG_LIBUKFS: 'y'
+    CONFIG_LIBUKFS_RAMFS: 'y'
+
+    CONFIG_MUSL: 'y'
+    CONFIG_LIBLWIP: 'y'
+    CONFIG_UKUNISTD: 'y'
+
+libraries:
+  lwip:
+    source: https://github.com/unikraft/lib-lwip.git
+    version: staging
+    kconfig:
+      CONFIG_LWIP_LOOPIF: 'y'
+      CONFIG_LWIP_UKNETDEV: 'y'
+      CONFIG_LWIP_LOOPBACK: 'y'
+      CONFIG_LWIP_TCP: 'y'
+      CONFIG_LWIP_UDP: 'y'
+      CONFIG_LWIP_RAW: 'y'
+      CONFIG_LWIP_WND_SCALE: 'y'
+      CONFIG_LWIP_TCP_KEEPALIVE: 'y'
+      CONFIG_LWIP_THREADS: 'y'
+      CONFIG_LWIP_HEAP: 'y'
+      CONFIG_LWIP_SOCKET: 'y'
+      CONFIG_LWIP_AUTOIFACE: 'y'
+      CONFIG_LWIP_IPV4: 'y'
+      CONFIG_LWIP_DHCP: 'y'
+      CONFIG_LWIP_DNS: 'y'
+      CONFIG_LWIP_NUM_TCPCON: 64
+      CONFIG_LWIP_NUM_TCPLISTENERS: 64
+      CONFIG_LWIP_ICMP: 'y'
+  musl:
+    source: https://github.com/unikraft/lib-musl
+    version: staging
+    kconfig:
+      CONFIG_LIBMUSL: 'y'
+
+
+targets:
+- qemu/x86_64
