@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: c-hello
+  annotations:
+    com.urunc.unikernel.mountRootfs: "false"
+spec:
+  runtimeClassName: urunc
+  containers:
+    - name: unikernel-main
+      imagePullPolicy: Always # Prevents breaking from crictl prune
+      resources:
+        limits:
+          memory: "64M"
+      image: unikraft-c-hello:latest
+
