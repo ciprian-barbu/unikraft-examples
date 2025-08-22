@@ -1,0 +1,6 @@
+[submodule "catalog-core"]
+	path = deps/unikraft/catalog-core
+	url = https://github.com/unikraft/catalog-core
+[submodule "catalog"]
+	path = deps/unikraft/catalog
+	url = https://github.com/unikraft/catalog
