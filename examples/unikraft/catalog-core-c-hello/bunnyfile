@@ -1,0 +1,13 @@
+#syntax=harbor.nbfc.io/nubificus/bunny:latest
+version: v0.1
+
+platforms:
+  framework: unikraft
+  monitor: qemu
+  architecture: x86
+
+kernel:
+  from: local
+  path: c-hello_qemu-x86_64
+
+cmdline: "/dummy"
