@@ -45,9 +45,17 @@ For now there are only Unikraft examples, more will be added in time, for instan
 
 ### Unikraft examples
 
+The Unikraft examples cover a few different usecases:
+
+* natively built unikernel with no rootfs
+* natively built unikernel with embedded initrd
+* binary compatibility (app-elfloader) with no rootfs
+
 #### catalog-core-c-hello
 
-This example is based on the [`C Hello on Unikraft](https://github.com/unikraft/catalog-core/tree/scripts/c-hello) from the catalog-core.
+This example is based on the [C Hello on Unikraft](https://github.com/unikraft/catalog-core/tree/scripts/c-hello) from the catalog-core.
+
+The unikernel is built in native mode, with no rootfs.
 
 #### catalog-nginx-1.25
 
