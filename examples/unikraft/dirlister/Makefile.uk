@@ -1,0 +1,3 @@
+$(eval $(call addlib,dirlister))
+
+DIRLISTER_SRCS-y += $(DIRLISTER_BASE)/main.c

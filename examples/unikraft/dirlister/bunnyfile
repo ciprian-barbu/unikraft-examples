@@ -1,0 +1,17 @@
+#syntax=harbor.nbfc.io/nubificus/bunny:latest
+version: v0.1
+
+platforms:
+  framework: unikraft
+  monitor: qemu
+  architecture: x86
+
+kernel:
+  from: local
+  path: .unikraft/build/dirlister_qemu-x86_64
+
+rootfs:
+  from: dirlister-rootfs:latest
+  type: raw
+
+cmdline: "/dummy/command/line"

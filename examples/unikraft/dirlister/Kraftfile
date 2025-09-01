@@ -1,0 +1,48 @@
+spec: v0.6
+
+name: dirlister
+
+#rootfs: ./rootfs/
+
+unikraft:
+  version: staging
+  kconfig:
+    CONFIG_LIBPOSIX_ENVIRON: 'y'
+    CONFIG_LIBPOSIX_SYSINFO: 'y'
+    CONFIG_LIBPOSIX_TIME: 'y'
+    CONFIG_LIBPOSIX_TIMERFD: 'y'
+
+    # For using an external initrd archive you will need
+    # to enable Unikraft's VFS subsystem:
+    CONFIG_LIBVFSCORE: 'y'
+    CONFIG_LIBUKCPIO: 'y'
+
+    # For any use of initrd you will need to enable:
+    CONFIG_LIBRAMFS: 'y'
+
+    # For automatic mounting of the initramfs during boot.
+    # Note this configuration prevents the unikernel from
+    # using anything else other than initrd as the rootfs.
+    CONFIG_LIBVFSCORE_AUTOMOUNT_ROOTFS: 'y'
+    CONFIG_LIBVFSCORE_ROOTFS_INITRD: 'y'
+    CONFIG_LIBVFSCORE_ROOTFS: "initrd"
+    CONFIG_LIBVFSCORE_AUTOMOUNT_UP: 'y'
+    CONFIG_LIBVFSCORE_AUTOMOUNT: 'y'
+
+    # Alternatively, for dynamic mounting, wherein you
+    # configure mounting options at boot time via
+    # kernel command-line arguments:
+    CONFIG_LIBVFSCORE_FSTAB: 'y'
+    #CONFIG_LIBDEVFS: 'y'
+    #CONFIG_LIBDEVFS_AUTOMOUNT: 'y'
+    #CONFIG_LIBDEVFS_DEVSTDOUT: 'y'
+    CONFIG_LIBUKFS: 'y'
+    CONFIG_LIBUKFS_RAMFS: 'y'
+
+    # Configs for 9p support
+    CONFIG_LIB9PFS: 'y'
+    CONFIG_LIBUK9P: 'y'
+    CONFIG_LIBUK9PFS: 'y'
+
+targets:
+- qemu/x86_64
